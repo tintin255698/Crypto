@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello FindController!{% endblock %}
+
+{% block body %}
+   {% for repos in pla %}
+<tr>
+    <td>{{ repos.nom}}</td>
+    {{ dump(repos.id) }}
+    {% endfor %}
+
+
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Historique par annee{% endblock %}
+
+
+{% block body %}
+    <div class="container">
+        <h3 class="text-center mt-5 mb-5">Cours du Bitcoin par mois du {{ TimeFrom }} au {{ TimeTo }}</h3>
+
+        <canvas id="myChart" width="400" height="400"></canvas>
+    </div>
+{% endblock %}
+
+
+
+{% block javascripts %}
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <script>
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: [ {{ time.time }}, {{ time.time1 }}, {{ time.time2 }} , {{ time.time3 }}, {{ time.time4 }}, {{ time.time5 }}, {{ time.time6 }}, {{ time.time7 }}, {{ time.time8 }}, {{ time.time9 }}
+                    , {{ time.time10 }}, {{ time.time11 }}],
+
+                datasets: [
+                    {
+                        label: 'high',
+                        borderColor: 'rgb(255, 99, 132)',
+                        backgroundColor: 'transparent',
+                        data: [ {{ high.high }}, {{ high.high1 }}, {{ high.high2 }}, {{ high.high3 }}, {{ high.high4 }}, {{ high.high5 }}, {{ high.high6 }}, {{ high.high7 }}, {{ high.high8 }}, {{ high.high9 }}, {{ high.high10 }},
+                            {{ high.high11 }}]
+                    },
+                    {
+                        label: 'low',
+                        borderColor: 'blue',
+                        backgroundColor: 'transparent',
+                        data: [ {{ low.low }}, {{ low.low1 }}, {{ low.low2 }}, {{ low.low3 }}, {{ low.low4 }}, {{ low.low5 }}, {{ low.low6 }}, {{ low.low7 }}, {{ low.low8 }}, {{ low.low9 }}, {{ low.low10 }},
+                            {{ low.low11 }}],
+                    }]},
+
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: false
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
+
+
+
+{% endblock %}

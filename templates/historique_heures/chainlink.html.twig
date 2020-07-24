@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Historique par heure{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h3 class="text-center mt-5 mb-5">Cours du Chainlink par heure du {{ TimeFrom }} au {{ TimeTo }}</h3>
+
+        <canvas id="myChart" width="400" height="400"></canvas>
+    </div>
+{% endblock %}
+
+
+
+{% block javascripts %}
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <script>
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: [ {{ time.time }}, {{ time.time1 }}, {{ time.time2 }} , {{ time.time3 }}, {{ time.time4 }}, {{ time.time5 }}, {{ time.time6 }}, {{ time.time7 }}, {{ time.time8 }}, {{ time.time9 }}
+                    , {{ time.time10 }}, {{ time.time11 }}, {{ time.time12 }}, {{ time.time13 }}, {{ time.time14 }}, {{ time.time15 }}, {{ time.time16 }}, {{ time.time17 }}, {{ time.time18 }}, {{ time.time19 }}
+                    , {{ time.time20 }}, {{ time.time21 }}, {{ time.time22 }}, {{ time.time23 }}],
+
+                datasets: [
+                    {
+                        label: 'high',
+                        borderColor: 'rgb(255, 99, 132)',
+                        backgroundColor: 'transparent',
+                        data: [ {{ high.high }}, {{ high.high1 }}, {{ high.high2 }}, {{ high.high3 }}, {{ high.high4 }}, {{ high.high5 }}, {{ high.high6 }}, {{ high.high7 }}, {{ high.high8 }}, {{ high.high9 }}, {{ high.high10 }},
+                            {{ high.high11 }}, {{ high.high12 }}, {{ high.high13 }}, {{ high.high14 }}, {{ high.high15 }}, {{ high.high16 }}, {{ high.high17 }}, {{ high.high18 }}, {{ high.high19 }}, {{ high.high20 }},
+                            {{ high.high21 }}, {{ high.high22 }}, {{ high.high23 }}]
+                    },
+                    {
+                        label: 'low',
+                        borderColor: 'blue',
+                        backgroundColor: 'transparent',
+                        data: [ {{ low.low }}, {{ low.low1 }}, {{ low.low2 }}, {{ low.low3 }}, {{ low.low4 }}, {{ low.low5 }}, {{ low.low6 }}, {{ low.low7 }}, {{ low.low8 }}, {{ low.low9 }}, {{ low.low10 }},
+                            {{ low.low11 }}, {{ low.low12 }}, {{ low.low13 }}, {{ low.low14 }}, {{ low.low15 }}, {{ low.low16 }}, {{ low.low17 }}, {{ low.low18 }}, {{ low.low19 }}, {{ low.low20 }},
+                            {{ low.low21 }}, {{ low.low22 }}, {{ low.low23 }}],
+                    }]},
+
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: false
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
+
+
+
+{% endblock %}
+
