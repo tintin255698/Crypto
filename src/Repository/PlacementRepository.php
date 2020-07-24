@@ -26,8 +26,7 @@ class PlacementRepository extends ServiceEntityRepository
         public function findByExampleField($id)
     {
         return $this->createQueryBuilder('p')
-            ->select('p, p.prix, p.quantite, p.produits, q')
-            ->join('p.portefeuille', 'q')
+            ->select('p')
             ->where('p.portefeuille= :portefeuille_id')
             ->setParameter('portefeuille_id', $id)
             ->getQuery()

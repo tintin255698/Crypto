@@ -27,14 +27,12 @@ class FindController extends AbstractController
 
 
     /**
-     * @Route("/find/placement/{id}", name="find_placement")
+     * @Route("/find/placement/{$id}", name="find_placement")
      */
     public function placement($id)
     {
-
         $repo = $this->getDoctrine()->getRepository(Placement::class);
         $pla = $repo->findby(array('portefeuille_id' => $id));
-
         dd($pla);
 
 
