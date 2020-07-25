@@ -1,15 +1,29 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello FindController!{% endblock %}
+{% block title %}Vos portefeuilles{% endblock %}
 
 {% block body %}
-   {% for repos in pla %}
-<tr>
-    <td>{{ repos.nom}}</td>
-    {{ dump(repos.id) }}
-    <td><a href="{{ path('/find/placement/{id}', {'id':repos.id}) }}" class="btn btn-dark">Modifier</a></td>
-
-    {% endfor %}
-
+    <div class="container">
+        <h1 class="mt-4 mb-4">Liste de vos portefeuilles</h1>
+        <table id="admin" class="table table-striped table-bordered" style="width:100%">
+            <thead>
+            <tr>
+                <th>Nom du portefeuille</th>
+                <th>Voir en detail</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for repos in pla %}
+            <tr>
+                <td>{{ repos.nom}}</td>
+                <td><a href="{{ path('find_placement', {'id':repos.id}) }}" class="btn btn-dark">Voir en detail</a></td>
+            <tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
 {% endblock %}
+
+
+

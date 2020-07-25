@@ -96,7 +96,7 @@ class UserAuthenticator extends AbstractFormLoginAuthenticator implements Passwo
             return new RedirectResponse($targetPath);
         }
 
-        return new RedirectResponse($this->urlGenerator->generate('portefeuille_affichage'));
+        return new RedirectResponse($this->urlGenerator->generate('find'));
     }
 
     protected function getLoginUrl()

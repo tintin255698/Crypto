@@ -49,7 +49,7 @@ class PortefeuilleController extends AbstractController
 
 
 
-            return $this->redirectToRoute('portefeuille_affichage');
+            return $this->redirectToRoute('find');
         }
 
         return $this->render('portefeuille/index.html.twig', array(

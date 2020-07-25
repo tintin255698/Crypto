@@ -1,1 +1,70 @@
 {% extends 'base.html.twig' %}
+
+{% block title %}Vos placements{% endblock %}
+
+{% block body %}
+    <div class="container">
+
+        <h1 class="mt-4 mb-4">Cours Actuel</h1>
+        <table id="admin" class="table table-striped table-bordered" style="width:100%">
+            <thead>
+            <th>Bitcoin</th>
+            <th>Ethereum</th>
+            <th>Chainlink</th>
+            <th>Bitcoin Cash</th>
+            <th>Cardano</th>
+            </thead>
+            <tbody>
+            <tr>
+                <td>{{ cours.btc}}</td>
+                <td>{{ cours.eth }}</td>
+                <td>{{ cours.link }}</td>
+                <td>{{ cours.bch }}</td>
+                <td>{{ cours.ada }}</td>
+            </tr>
+            </tbody>
+        </table>
+
+
+
+
+        <h1 class="mt-4 mb-4">Liste de vos placements</h1>
+        <table id="admin" class="table table-striped table-bordered" style="width:100%">
+            <thead>
+            <tr>
+                <th>Nom du placement</th>
+                <th>Prix unitaire</th>
+                <th>Quantite achetees</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for repos in pla %}
+            <tr>
+                <td>{{ repos.produits}}</td>
+                <td>{{ repos.prix}}</td>
+                <td>{{ repos.quantite}}</td>
+                <td>
+                    {% if repos.produits == 'Bitcoin'  %}
+                        {% set foo = (cours.btc - repos.prix)*repos.quantite  %}
+                        {{ foo }}
+                    {% elseif repos.produits == 'Ethereum'%}
+                        {% set foo = (cours.eth - repos.prix)*repos.quantite  %}
+                        {{ foo }}
+                    {% elseif repos.produits == 'Chainlink'%}
+                        {% set foo = (cours.link-repos.prix)*repos.quantite  %}
+                        {{ foo }}
+                    {% elseif repos.produits == 'Bitcoin Cash'%}
+                        {% set foo = (cours.bch - repos.prix)*repos.quantite  %}
+                        {{ foo }}
+                    {% elseif repos.produits == 'Cardano'%}
+                        {% set foo = (cours.ada - repos.prix)*repos.quantite  %}
+                        {{ foo }}
+                    {% endif %}
+                </td>
+            <tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}
