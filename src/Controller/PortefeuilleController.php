@@ -80,14 +80,11 @@ class PortefeuilleController extends AbstractController
         return $this->render('portefeuille\show.html.twig', array(
             'repo' => $repo,
             'cours' => compact('btc','eth', 'link', 'bch', 'ada')
-        ));
+        ));}
 
 
 
 
-
-
-    }
 
 
 }

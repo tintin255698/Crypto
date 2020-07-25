@@ -115,6 +115,19 @@ class GestionPersonnelleController extends AbstractController
     }
 
 
+    /**
+     * @Route("/gestion/supprimer/{id}", name="gestion_suppression")
+     */
+
+    public function suppression(User $id)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($id);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('home');
+    }
+
 
 
 }

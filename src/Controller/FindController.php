@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Placement;
 use App\Entity\Portefeuille;
 use App\Repository\PlacementRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -21,6 +22,7 @@ class FindController extends AbstractController
         $pla = $repo->findby(array('user' => $user));
 
         return $this->render('find/index.html.twig', [
+
             'pla' => $pla,
         ]);
     }
@@ -30,7 +32,7 @@ class FindController extends AbstractController
      */
     public function placement($id, PlacementRepository $repo)
     {
-        $placement = $repo->findByPortefeuille(array('id'=>$id));
+        $placement = $repo->findByPortefeuille(array('id' => $id));
 
         $json = file_get_contents('https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC,ETH,LINK,BCH,ADA&tsyms=EUR&=b33fc847fb8ce25afe2257eaef4fccea04219ca2d3022f0289bb5708bfe9efca');
         $parsed_json = json_decode($json);
@@ -41,13 +43,39 @@ class FindController extends AbstractController
         $ada = $parsed_json->{'ADA'}->{'EUR'};
 
 
-
         dump($placement);
 
         return $this->render('find/placement.html.twig', [
             'pla' => $placement,
-            'cours' => compact('btc','eth', 'link', 'bch', 'ada')
+            'cours' => compact('btc', 'eth', 'link', 'bch', 'ada')
         ]);
     }
+
+    /**
+     * @Route("/find/placement/supprimer/{id}", name="supprimer_placement")
+     */
+    public function supprimerPlacement(Placement $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($id);
+        $em->flush();
+        return $this->redirectToRoute('home');
+    }
+
+
+    /**
+     * @Route("/find/portefeuille/supprimer/{id}", name="supprimer_portefeuille")
+     */
+    public function supprimerPortefeuille(Portefeuille $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($id);
+        $em->flush();
+        return $this->redirectToRoute('home');
+    }
+
+
+
+
 }
 

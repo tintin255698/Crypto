@@ -10,6 +10,7 @@
             <tr>
                 <th>Nom du portefeuille</th>
                 <th>Voir en detail</th>
+                <th>Supprimer</th>
             </tr>
             </thead>
             <tbody>
@@ -17,6 +18,7 @@
             <tr>
                 <td>{{ repos.nom}}</td>
                 <td><a href="{{ path('find_placement', {'id':repos.id}) }}" class="btn btn-dark">Voir en detail</a></td>
+                <td><a href="{{ path('supprimer_portefeuille', {'id':repos.id}) }}" class="btn btn-dark">Supprimer</a></td>
             <tr>
                 {% endfor %}
             </tbody>
