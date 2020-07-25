@@ -15,7 +15,6 @@ class GestionPersonnelleType extends AbstractType
             ->add('prenom')
             ->add('nom')
             ->add('email')
-            ->add('password')
         ;
     }
 
