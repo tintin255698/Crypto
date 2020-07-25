@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -22,22 +23,23 @@ class RegistrationFormType extends AbstractType
             ->add('prenom', TextType::class, ['label'=>'Prenom', 'attr'=>['placeholder'=>'Entrer votre prenom']])
             ->add('nom', TextType::class, ['label'=>'Nom', 'attr'=>['placeholder'=>'Entrer votre nom']] )
             ->add('email', EmailType::class, ['label'=>'Email', 'attr'=>['placeholder'=>'Entrer votre email']])
-            ->add('plainPassword', PasswordType::class, ['label'=>'Mot de passe', 'attr'=>['placeholder'=>'Entrer votre mot de passe'],
-                // instead of being set onto the object directly,
-                // this is read and encoded in the controller
+            ->add('plainPassword', RepeatedType::class, array(
+               'type' => PasswordType::class,
+                'label'=>'Mot de passe',
+                'attr'=>['placeholder'=>'Entrer votre mot de passe'],
                 'mapped' => false,
-                'constraints' => [
+                'constraints' => array (
                     new NotBlank([
                         'message' => "Merci d'entrer un mot de passe",
                     ]),
                     new Length([
                         'min' => 6,
                         'minMessage' => 'Votre mot de passe doit contenir au minimum 6 caracteres',
-                        // max length allowed by Symfony for security reasons
                         'max' => 4096,
-                    ]),
-                ],
-            ])
+                    ])),
+                'first_options' => array('label' => 'Mot de passe', 'attr'=>['placeholder'=>'Entrer votre mot de passe']),
+                'second_options'=> array('label' => 'Confirmation du mot de passe', 'attr'=>['placeholder'=>'Entrer la confirmation de votre mot de passe']),
+            ))
         ;
     }
 
