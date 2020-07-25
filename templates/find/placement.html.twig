@@ -2,6 +2,12 @@
 
 {% block title %}Vos placements{% endblock %}
 
+{% block stylesheets %}
+    <link rel="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap.min.css">
+{% endblock %}
+
+
 {% block body %}
     <div class="container">
 
@@ -68,3 +74,16 @@
     </div>
 
 {% endblock %}
+
+  {% block javascripts %}
+
+      <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+      <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap.min.js"></script>
+      <script>
+          $(document).ready(function() {
+              $('#admin').DataTable();
+          } );
+      </script>
+
+
+  {% endblock %}

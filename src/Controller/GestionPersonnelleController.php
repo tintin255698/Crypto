@@ -96,6 +96,26 @@ class GestionPersonnelleController extends AbstractController
     }
 
 
+    /**
+     * @Route("/gestion/affichage", name="gestion_affichage")
+     */
+
+    public function affichage()
+    {
+
+        $user = $this->getUser();
+        $repo = $this->getDoctrine()->getRepository(User::class);
+        $pla = $repo->find(array('id'=>$user));
+
+        dump($pla);
+
+        return $this->render('gestion_personnelle/affichage.html.twig', [
+            'user' => $pla,
+        ]);
+    }
+
+
+
 
 }
 
