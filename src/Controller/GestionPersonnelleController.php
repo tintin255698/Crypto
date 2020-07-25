@@ -11,6 +11,7 @@ use App\Form\EditUserType;
 use App\Form\GestionPersonnelleType;
 use App\Form\MdpType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -66,9 +67,7 @@ class GestionPersonnelleController extends AbstractController
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
-            if(!password_verify($maj->getAncienMdp(), $user->getPassword())){
-                //gerer l'erreur
-            } else {
+            if(password_verify($maj->getAncienMdp(), $user->getPassword())){
                 $nouveau = $maj->getNouveauMdp();
                 $password = $encoder->encodePassword($user, $nouveau);
 
@@ -77,21 +76,22 @@ class GestionPersonnelleController extends AbstractController
                 $doctrine = $this->getDoctrine()->getManager();
                 $doctrine->persist($user);
                 $doctrine->flush();
+
+                $this->addFlash(
+                    'success',
+                    '<strong>Votre mot de passe a bien ete modifie !</strong>');
+
+                return $this->redirectToRoute('home');
+
+            } else {
+                $form->get('ancienMDP')->addError(new FormError("Le mot de passe saisi n'est pas le bon"));
             }
-
-            $this->addFlash(
-                'success',
-                '<strong>Votre mot de passe a bien ete modifie !</strong>'
-            );
-
-            return $this->redirectToRoute('home');
-
-
 
         }
 
         return $this->render('gestion_personnelle/mdp.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+
         ]);
     }
 
