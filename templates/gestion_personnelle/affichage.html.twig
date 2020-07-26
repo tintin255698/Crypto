@@ -12,7 +12,8 @@
             <th>Prenom</th>
             <th>Nom</th>
             <th>Email</th>
-            <th>Modifier</th>
+            <th>Modifier ses identifiants</th>
+            <th>Modifier son mot de passe</th>
             <th>Supprimer</th>
             </thead>
             <tbody>
@@ -20,7 +21,8 @@
                 <td>{{user.prenom}}</td>
                 <td>{{ user.nom }}</td>
                 <td>{{ user.email }}</td>
-                <td><a href="" class="btn btn-dark">Modifier</a></td>
+                <td><a href="{{ path ('gestion_personnelle_modification') }}" class="btn btn-dark">Modifier</a></td>
+                <td><a href="{{ path ('gestion_mdp_modification') }}" class="btn btn-dark">Modifier</a></td>
                 <td><a href="{{ path('gestion_suppression', {'id':user.id}) }}" class="btn btn-dark">Supprimer</a></td>
                 </tr>
             </tbody>

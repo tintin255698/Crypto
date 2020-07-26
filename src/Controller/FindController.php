@@ -59,7 +59,7 @@ class FindController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $em->remove($id);
         $em->flush();
-        return $this->redirectToRoute('home');
+        return $this->redirectToRoute('find');
     }
 
 
@@ -71,7 +71,7 @@ class FindController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $em->remove($id);
         $em->flush();
-        return $this->redirectToRoute('home');
+        return $this->redirectToRoute('find');
     }
 
 
